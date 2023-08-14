@@ -14,11 +14,12 @@ urlpatterns = [
     path(
         "add_eventmember/<int:event_id>", views.add_eventmember, name="add_eventmember"
     ),
-    path(
-        "event/<int:pk>/remove",
-        views.EventMemberDeleteView.as_view(),
-        name="remove_event",
-    ),
+    # path(
+    #     "event/<int:pk>/remove",
+    #     views.EventMemberDeleteView.as_view(),
+    #     name="remove_event",
+    # ),
+    path("event/<int:pk>/remove", views.remove_event, name="remove_event"),
     path("all-event-list/", views.AllEventsListView.as_view(), name="all_events"),
     path(
         "running-event-list/",

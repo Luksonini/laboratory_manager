@@ -1,6 +1,6 @@
 # cal/views.py
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views import generic
 from django.utils.safestring import mark_safe
@@ -103,6 +103,12 @@ def add_eventmember(request, event_id):
     context = {"form": forms}
     return render(request, "add_member.html", context)
 
+@login_required(login_url="signup")
+def remove_event(request, pk):
+    if request.method == 'POST':
+        event = get_object_or_404(Event, pk=pk)
+        event.delete()
+        return redirect('calendarapp:calendar')  # przekierowujemy użytkownika z powrotem do kalendarza
 
 class EventMemberDeleteView(generic.DeleteView):
     model = EventMember
@@ -117,8 +123,8 @@ class CalendarViewNew(LoginRequiredMixin, generic.View):
 
     def get(self, request, *args, **kwargs):
         forms = self.form_class()
-        events = Event.objects.get_all_events(user=request.user)
-        events_month = Event.objects.get_running_events(user=request.user)
+        events = Event.objects.get_all_events()
+        events_month = Event.objects.get_running_events()
         event_list = []
         # start: '2020-09-16T16:00:00'
         for event in events:
