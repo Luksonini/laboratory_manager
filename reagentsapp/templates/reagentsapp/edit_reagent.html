@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="flex justify-center items-center">
+    <div class="w-1/3">
+        <h1 class="font-bold text-3xl mb-3">Edytuj odczynnik</h1>
+        <form class='shadow-lg p-10 text-2xl font-bold' method='POST'>
+            {% csrf_token %}
+            
+            <!-- Nazwa odczynnika -->
+            <div class="mb-3">
+                <label class="block mb-1 w-1/2">Nazwa odczynnika:</label>
+                <div class="no-border rounded appearance-none py-2 px-2 w-full">{{ reagent_form.reagent_name }}</div>
+            </div>
+
+            <!-- Właściciel -->
+            <div class="mb-3">
+                <label class="block mb-1">Właściciel</label>
+                <div class="no-border rounded appearance-none py-2 px-2 w-full">{{ reagent_form.owner }}</div>
+            </div>
+
+            <!-- Firma -->
+            <div class="mb-3">
+                <label class="block mb-1">Firma</label>
+                <div class="no-border rounded appearance-none py-2 px-2 w-full">{{ reagent_form.firm }}</div>
+            </div>
+
+            <!-- Gdzie mogę znaleźć -->
+            <div class="mb-3">
+                <label class="block mb-1">Gdzie mogę znaleźć</label>
+                <div class="no-border rounded appearance-none py-2 px-2 w-full">{{ reagent_form.location }}</div>
+            </div>
+
+            <!-- Numer katalogowy -->
+            <div class="mb-3">
+                <label class="block mb-1">Numer katalogowy</label>
+                <div class="no-border rounded appearance-none py-2 px-2 w-full">{{ reagent_form.cat_number }}</div>
+            </div>
+
+            <!-- Data przydatności -->
+            <div class="mb-3">
+                <label class="block mb-1">Data przydatności</label>
+                <div class="no-border rounded appearance-none py-2 px-2 w-full">{{ reagent_form.expiration_date }}</div>
+            </div>
+
+            <!-- Data zakupu -->
+            <div class="mb-3">
+                <label class="block mb-1">Data zakupu</label>
+                <div class="no-border rounded appearance-none py-2 px-2 w-full">{{ reagent_form.purchase_date }}</div>
+            </div>
+
+            <!-- Opis -->
+            <div class="mb-4">
+                <label class="block mb-1">Opis</label>
+                <div class="no-border rounded appearance-none py-2 px-2 w-full">{{ reagent_form.description }}</div>
+            </div>
+
+            <!-- Przycisk dodaj -->
+            <button type='submit' class="mt-4 py-2 px-4 bg-blue-500 text-white rounded">Zaktualizuj</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
