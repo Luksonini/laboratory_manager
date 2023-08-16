@@ -55,26 +55,30 @@
                             {% csrf_token %}
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Event Title:</label>
+                                    <label for="recipient-name" class="col-form-label">Tytuł wydarzenia:</label>
                                     {{ form.title }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="message-text" class="col-form-label">Description:</label>
+                                    <label for="message-text" class="col-form-label">Opis:</label>
                                     {{ form.description }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="message-text" class="col-form-label">Start Date:</label>
+                                    <label for="message-text" class="col-form-label">Data startu:</label>
                                     {{ form.start_time }}
                                 </div>
                                 <div class="form-group">
-                                    <label for="message-text" class="col-form-label">End Date:</label>
+                                    <label for="message-text" class="col-form-label">Data końcowa:</label>
                                     {{ form.end_time }}
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button id="modalClose2" type="button" class="btn btn-danger">Close</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
+                              <button id="modalClose2" type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                  Zamknij
+                              </button>
+                              <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">
+                                  Zapisz
+                              </button>
+                          </div>
                         </form>
                     </div>
                 </div>
@@ -91,7 +95,7 @@
         var calendarEl = document.getElementById('calendar');
         var today = new Date();
 
-        var calendar = new FullCalendar.Calendar(calendarEl, {
+        var calendar = new FullCalendar.Calendar(calendarEl, {locale: 'pl',
           headerToolbar: {
             left: 'prev,next today',
             center: 'title',

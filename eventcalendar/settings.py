@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'reagentsapp',
-    'widget_tweaks',
+    'django_filters',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.locale.LocaleMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -103,7 +104,11 @@ AUTH_USER_MODEL = "accounts.User"
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGES = [
+    ('pl', 'Polish'),
+]
+
+LANGUAGE_CODE = "pl"
 
 TIME_ZONE = "UTC"
 
@@ -112,6 +117,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = False
+
 
 
 # Static files (CSS, JavaScript, Images)
