@@ -1,7 +1,7 @@
 
 ## How To Setup
 ```
-https://github.com/Luksonini/laboratory_manager.git
+git clone https://github.com/Luksonini/laboratory_manager.git
 ```
 ```
 cd event-calendar
