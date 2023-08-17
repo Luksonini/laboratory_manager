@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 {% load static %}
-{% block title %}Event Calendar{% endblock title %}
+{% block title %}Kalendarz eksperymentów{% endblock title %}
 
 {% block extracss %}
   <link href="{% static 'calender/main.css' %}" rel="stylesheet" />
@@ -8,12 +8,12 @@
 
 {% block breadcrumb %}
   <div>
-      <h1><i class="fa fa-calendar"></i> Calendar</h1>
-      <p>Event Calendar</p>
+      <h1><i class="fa fa-calendar"></i> Kalendarz</h1>
+      <p>Kalendarz eksperymentów</p>
   </div>
   <ul class="app-breadcrumb breadcrumb">
       <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="#">Calendar</a></li>
+      <li class="breadcrumb-item"><a href="#">Kalendarz</a></li>
   </ul>
 {% endblock breadcrumb %}
 
@@ -26,15 +26,15 @@
                   {% for event in events_month %}
                   <div class="fc-event">
                       <h3>{{ event.title }}</h3>
-                      <p>From: {{ event.start_time }}</p>
-                      <p>To: {{ event.end_time }}</p>
+                      <p>Od: {{ event.start_time }}</p>
+                      <p>Do: {{ event.end_time }}</p>
                       <form action="{% url 'calendarapp:remove_event' pk=event.id %}" method="post">
                           {% csrf_token %}
-                          <button type="submit" class="btn btn-danger">Usuń</button>
+                          <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-3 rounded mt-3">Usuń</button>
                       </form>
                   </div>
                   {% empty %}
-                  <p>No Running Events Found</p>
+                  <p>Nie znaleziono wydarzeń</p>
                   {% endfor %}
                 </div>
             </div>
