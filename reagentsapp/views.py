@@ -6,6 +6,7 @@ from .filters import OrderFilter
 import qrcode
 from io import BytesIO
 import base64
+from django.http import HttpResponseForbidden
 
 def reagents(request):
     reagents = Reagents.objects.all()
@@ -35,8 +36,11 @@ def delete_reagent(request, id):
     reagent.delete()
     return redirect('reagentsapp:reagents_list')
 
-def reagent_details(request, id):
+import matplotlib.pyplot as plt
+
+def reagent_details(request, id, access_key=None):
     reagent = Reagents.objects.get(id=id)
+    
     error_message = None
     usage_form = ReagentUsageForm()
 
@@ -54,15 +58,39 @@ def reagent_details(request, id):
         else:
             error_message = "Nieprawidłowe dane w formularzu!"
 
-    reagent_url = request.build_absolute_uri()
-    img = qrcode.make(reagent_url)
-    buffer = BytesIO()
-    img.save(buffer, format="PNG")
-    img_data = base64.b64encode(buffer.getvalue()).decode()
+    pie_chart_data = generate_pie_chart(reagent.remained, reagent.quantity)
+    qr_code_data = generate_qr_code_url(request, reagent)
 
     return render(request, 'reagentsapp/reagent_detail.html', {
         'reagent': reagent,
         'usage_form': usage_form,
         'error_message': error_message,
-        'qr_data': img_data
+        'qr_data': qr_code_data,
+        'pie_chart_data': pie_chart_data
     })
+
+
+
+def generate_pie_chart(remained, quantity):
+    labels = ['Pozostało', 'Zużyte']
+    sizes = [remained, quantity - remained]
+    colors = ['#12af83', '#ff6666']
+
+    plt.figure(figsize=(5, 5))
+    plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90, colors=colors)
+    plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    
+    buffer = BytesIO()
+    plt.savefig(buffer, format="png", transparent=True)
+    plt.close()
+    
+    pie_chart_data = base64.b64encode(buffer.getvalue()).decode()
+    return pie_chart_data
+
+def generate_qr_code_url(request, reagent):
+    reagent_url = request.build_absolute_uri(reverse('reagentsapp:reagent_details', args=[reagent.id, reagent.access_key]))
+    img = qrcode.make(reagent_url)
+    buffer = BytesIO()
+    img.save(buffer)
+    img_data = base64.b64encode(buffer.getvalue()).decode()
+    return img_data

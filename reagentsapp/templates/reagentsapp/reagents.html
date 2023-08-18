@@ -1,18 +1,18 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
-<div class="md:container ">
+<div class="md:container w-full">
     <div class="flex items-end mb-1">
         <h2 class="text-3xl font-bold">Lista odczynników</h2>
         <a href="{% url 'reagentsapp:create_reagent' %}" class="ml-2 rounded-full py-2 px-4 bg-indigo-400 hover:bg-indigo-500 text-white">Dodaj</a>
     </div>
     <form method='get'>
-    <table class="min-w-full bg-white border border-gray-300 w-full">
+    <table class="bg-white border border-gray-300 w-full">
         <thead class='text-lg bg-blue-400 text-white'>
             <tr>
                 <th class="py-2 px-4 border-b">Nazwa odczynnika <br><div class='text-black'>{{ my_filter.form.reagent_name }}</div></th>
                 <th class="py-2 px-4 border-b">Właściciel <br><div class='text-black'>{{ my_filter.form.owner }}</div></th>
-                <th class="py-2 px-4 border-b">Firma <br><div class='text-black'>{{ my_filter.form.firm }}</div></th>
+                <th class="py-2 px-4 border-b" style="max-width: 500px;">Firma <br><div class='text-black'>{{ my_filter.form.firm }}</div></th>
                 <th class="py-2 px-4 border-b">Lokalizacja <br><div class='text-black'>{{ my_filter.form.location }}</div></th>
                 <th class="py-2 px-4 border-b">Numer kat. <br><div class='text-black'>{{ my_filter.form.cat_number }}</div></th>
                 <th class="py-2 px-4 border-b">Data ważności</th>
@@ -31,13 +31,14 @@
                     <td class="py-2 px-4 border-b">{{ reagent.firm }}</td>
                     <td class="py-2 px-4 border-b">{{ reagent.location }}</td>
                     <td class="py-2 px-4 border-b">{{ reagent.cat_number }}</td>
-                    <td class="py-2 px-4 border-b">{{ reagent.expiration_date }}</td>
+                    <td class="py-2 px-4 border-b">{{ reagent.expiration_date }}</td>  
                     <td class="py-2 px-4 border-b">{{ reagent.purchase_date }}</td>
                     <td class="py-2 px-4 border-b">{{ reagent.remained }}</td>
                     <td class="py-2 px-4 border-b">{{ reagent.unit }}</td>
                     <td class="py-2 px-4 border-b inline-flex">
                     <a href="{% url 'reagentsapp:delete_reagent' reagent.id %}" class="rounded-full py-2 px-4 border-b bg-yellow-400 hover:bg-yellow-500" onclick="return confirm('Czy na pewno chcesz usunąć ten odczynnik?');">Usuń</a> 
                     <a href="{% url 'reagentsapp:edit_reagent' reagent.id %}" class="rounded-full ml-2 py-2 px-4 border-b bg-green-400 hover:bg-green-500">Edytuj</a>
+                    <a href="{% url 'reagentsapp:reagent_details' reagent.id reagent.access_key%}" class="rounded-full ml-2 py-2 px-4 border-b bg-rose-100 hover:bg-rose-200">Szczegóły</a>
                     </td>
                 </tr>
             {% endfor %}

@@ -13,7 +13,7 @@ class ReagentForm(forms.ModelForm):
         ('mg', 'mg'),
         ('szt', 'sztuk'),
     )
-    reagent_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200', "placeholder": "Pole wymagane np: Fluoksetyna"}))
+    reagent_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-3/5 border rounded bg-blue-200', "placeholder": "Pole wymagane np: Fluoksetyna"}))
     expiration_date = forms.DateField(widget=forms.DateInput(attrs={'class': 'w-full border rounded bg-blue-200', 'type': 'date', "placeholder": "Pole opcjonalne"}), required=False)
     purchase_date = forms.DateField(widget=forms.DateInput(attrs={'class': 'w-full border rounded bg-blue-200', 'type': 'date', "placeholder": "Pole opcjonalne"}), required=False)
     owner = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200', "placeholder": "Pole opcjonalne np: Bartek"}), required=False)

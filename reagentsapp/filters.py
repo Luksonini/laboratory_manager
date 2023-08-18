@@ -5,7 +5,7 @@ from .models import Reagents
 
 class OrderFilter(django_filters.FilterSet):
     reagent_name = CharFilter(widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200'}))
-    owner = CharFilter(widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200'}))
+    owner = CharFilter(widget=forms.TextInput(attrs={'class': 'w-9/10 form-input border rounded bg-blue-200'}))
     firm = CharFilter(widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200'}))
     location = CharFilter(widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200'}))
     cat_number = CharFilter(widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200'}))
