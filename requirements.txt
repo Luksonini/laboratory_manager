@@ -47,3 +47,4 @@ urllib3==1.26.7
 virtualenv==20.7.0
 wrapt==1.12.1
 django-filter==23.2
+qrcode==7.4.2

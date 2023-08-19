@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="md:container mx-auto w-full">
+    <div class="flex items-end mb-1">
+        <h2 class="text-3xl font-bold">Lista próbek</h2>
+        <a href="{% url 'samplesapp:create_sample' %}" class="ml-2 rounded-full py-2 px-4 bg-indigo-400 hover:bg-indigo-500 text-white">Dodaj</a>
+    </div>
+    <form method='get'>
+    <table class="bg-white border border-gray-300 w-full">
+        <thead class='text-lg bg-blue-400 text-white'>
+            <tr>
+                <th class="py-2 px-4 border-b">Data izolacji <br><div class='text-black'>{{ sample_filter.form.sample_date }}</div></th>
+                <th class="py-2 px-4 border-b">Nazwa próbek <br><div class='text-black'>{{ sample_filter.form.sample_name }}</div></th>
+                <th class="py-2 px-4 border-b">Właściciel <br><div class='text-black'>{{ sample_filter.form.owner }}</div></th>
+                <th class="py-2 px-4 border-b">Lokalizacja <br><div class='text-black'>{{ sample_filter.form.location }}</div></th>
+                <th class="py-2 px-4 border-b">Rodzaj próbki <br><div class='text-black'>{{ sample_filter.form.sample_type }}</div></th>
+                <th class="py-2 px-4 border-b">Wyizolowano</th>
+                <th class="py-2 px-4 border-b">Pozostało</th>
+                <th class="py-2 px-4 border-b"><button class="rounded-full py-2 px-4 bg-indigo-400 hover:bg-indigo-500 text-white text-base font-normal" type='submit'>Znajdź</button>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% for sample in samples %}
+                <tr class="text-1xl hover:bg-gray-100">
+                    <td class="py-2 px-4 border-b font-bold" style="max-width: 100px;">{{ sample.sample_date }}</td>
+                    <td class="py-2 px-4 border-b" style="max-width: 100px;">{{ sample.sample_name }}</td>
+                    <td class="py-2 px-4 border-b" style="max-width: 100px;">{{ sample.owner }}</td>
+                    <td class="py-2 px-4 border-b" style="max-width: 100px;">{{ sample.location }}</td>
+                    <td class="py-2 px-4 border-b" style="max-width: 100px;">{{ sample.sample_type }}</td>
+                    <td class="py-2 px-4 border-b" style="max-width: 100px;">{{ sample.quantity }}</td>  
+                    <td class="py-2 px-4 border-b" style="max-width: 100px;">{{ sample.remained }}</td>
+                    <td class="py-2 px-4 border-b inline-flex" style="max-width: 300px;">
+                    <a href="{% url 'samplesapp:delete_sample' sample.id %}" class="rounded-full py-2 px-4 border-b bg-yellow-400 hover:bg-yellow-500" onclick="return confirm('Czy na pewno chcesz usunąć ten odczynnik?');">Usuń</a> 
+                    <a href="{% url 'samplesapp:edit_sample' sample.id %}" class="rounded-full ml-2 py-2 px-4 border-b bg-green-400 hover:bg-green-500">Edytuj</a>
+                    <a href="{% url 'samplesapp:sample_details' sample.id sample.access_key %}" class="rounded-full ml-2 py-2 px-4 border-b bg-rose-100 hover:bg-rose-200">Szczegóły</a>
+                    </td> 
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </form>
+</div>
+{% endblock %}

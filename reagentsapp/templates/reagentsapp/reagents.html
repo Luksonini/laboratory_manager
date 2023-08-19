@@ -12,7 +12,7 @@
             <tr>
                 <th class="py-2 px-4 border-b">Nazwa odczynnika <br><div class='text-black'>{{ my_filter.form.reagent_name }}</div></th>
                 <th class="py-2 px-4 border-b">Właściciel <br><div class='text-black'>{{ my_filter.form.owner }}</div></th>
-                <th class="py-2 px-4 border-b" style="max-width: 500px;">Firma <br><div class='text-black'>{{ my_filter.form.firm }}</div></th>
+                <th class="py-2 px-4 border-b">Firma <br><div class='text-black'>{{ my_filter.form.firm }}</div></th>
                 <th class="py-2 px-4 border-b">Lokalizacja <br><div class='text-black'>{{ my_filter.form.location }}</div></th>
                 <th class="py-2 px-4 border-b">Numer kat. <br><div class='text-black'>{{ my_filter.form.cat_number }}</div></th>
                 <th class="py-2 px-4 border-b">Data ważności</th>
@@ -38,7 +38,7 @@
                     <td class="py-2 px-4 border-b inline-flex">
                     <a href="{% url 'reagentsapp:delete_reagent' reagent.id %}" class="rounded-full py-2 px-4 border-b bg-yellow-400 hover:bg-yellow-500" onclick="return confirm('Czy na pewno chcesz usunąć ten odczynnik?');">Usuń</a> 
                     <a href="{% url 'reagentsapp:edit_reagent' reagent.id %}" class="rounded-full ml-2 py-2 px-4 border-b bg-green-400 hover:bg-green-500">Edytuj</a>
-                    <a href="{% url 'reagentsapp:reagent_details' reagent.id reagent.access_key%}" class="rounded-full ml-2 py-2 px-4 border-b bg-rose-100 hover:bg-rose-200">Szczegóły</a>
+                    <a href="{% url 'reagentsapp:reagent_details' reagent.id reagent.access_key %}" class="rounded-full ml-2 py-2 px-4 border-b bg-rose-100 hover:bg-rose-200">Szczegóły</a>
                     </td>
                 </tr>
             {% endfor %}
