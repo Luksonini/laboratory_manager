@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
 from .views import DashboardView
-
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path("", DashboardView.as_view(), name="dashboard"),
@@ -26,4 +26,7 @@ urlpatterns = [
     path("", include("calendarapp.urls")),
     path("reagents/", include('reagentsapp.urls')),
     path("samples/", include('samplesapp.urls')),
+    path("protocols/", include('protocolsapp.urls')),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

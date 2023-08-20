@@ -4,13 +4,13 @@ from django_filters import CharFilter
 from .models import Reagents
 
 class OrderFilter(django_filters.FilterSet):
-    reagent_name = CharFilter(widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200'}))
-    owner = CharFilter(widget=forms.TextInput(attrs={'class': 'w-9/10 form-input border rounded bg-blue-200'}))
-    firm = CharFilter(widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200'}))
-    location = CharFilter(widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200'}))
-    cat_number = CharFilter(widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200'}))
+    reagent_name = CharFilter(widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200', 'style': 'max-width: 100px;'}))
+    owner = CharFilter(widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200', 'style': 'max-width: 100px;'}))
+    firm = CharFilter(widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200', 'style': 'max-width: 100px;'}))
+    location = CharFilter(widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200', 'style': 'max-width: 100px;'}))
+    cat_number = CharFilter(widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200', 'style': 'max-width: 100px;'}))
     note = CharFilter(field_name="description", lookup_expr='icontains',
-                       widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200'})
+                       widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200', 'style': 'max-width: 100px;'})
     )
     class Meta:
         model = Reagents

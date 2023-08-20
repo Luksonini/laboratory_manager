@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from . forms import SamplesForm, SampleUsageForm
-from .models import SamplesModel
+from .models import SamplesModel, SampleUsageModel
 from .filters import OrderSampleFilter
 from reagentsapp.utils import generate_pie_chart
 import base64
@@ -39,6 +39,7 @@ def delete_sample(request, id):
 
 def sample_details(request, id, access_key=None):
     sample = SamplesModel.objects.get(id=id)
+    usages = SampleUsageModel.objects.filter(sample=sample)
 
     error_message = None
     usage_form = SampleUsageForm()
@@ -50,29 +51,41 @@ def sample_details(request, id, access_key=None):
             used_amount = usage_form.cleaned_data.get('used_amount')
 
             if sample.remained - used_amount >= 0:
+                # Aktualizacja wartości `remained` w modelu SamplesModel
                 sample.remained -= used_amount
                 sample.save()
+
+                # Tworzenie nowego obiektu SampleUsageModel
+                usage_description = usage_form.cleaned_data.get('description')
+                usage = SampleUsageModel(
+                    sample=sample,
+                    quantity_used=used_amount,
+                    description=usage_description
+                )
+                usage.save()
+
             else:
                 error_message = "Próba zużycia większej ilości próbki niż dostępna!"
         else:
             error_message = "Nieprawidłowe dane w formularzu!"
 
-    # pie_chart_data = generate_pie_chart(sample.remained, sample.quantity)
-    # qr_code_data = generate_qr_code_url(request, sample)
+    pie_chart_data = generate_pie_chart(sample.remained, sample.quantity)
+    qr_code_data = generate_qr_code_url(request, sample)
 
     return render(request, 'samplesapp/sample_detail.html', {
         'sample': sample,
         'usage_form': usage_form,
         'error_message': error_message,
-        # 'qr_data': qr_code_data,
-        # 'pie_chart_data': pie_chart_data
+        'qr_data': qr_code_data,
+        'pie_chart_data': pie_chart_data,
+        'usages': usages
     })
 
 
-# def generate_qr_code_url(request, sample):
-#     sample_url = request.build_absolute_uri(reverse('samplesapp:sample_details', args=[sample.id, sample.access_key]))
-#     img = qrcode.make(sample_url)
-#     buffer = BytesIO()
-#     img.save(buffer)
-#     img_data = base64.b64encode(buffer.getvalue()).decode()
-#     return img_data
+def generate_qr_code_url(request, sample):
+    sample_url = request.build_absolute_uri(reverse('samplesapp:sample_details', args=[sample.id, sample.access_key]))
+    img = qrcode.make(sample_url)
+    buffer = BytesIO()
+    img.save(buffer)
+    img_data = base64.b64encode(buffer.getvalue()).decode()
+    return img_data
