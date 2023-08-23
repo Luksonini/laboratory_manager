@@ -3,13 +3,12 @@ import os
 from docx import Document
 import re
 
-os.environ['OPEN_API_KEY'] = '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'
+os.environ['OPEN_API_KEY'] = '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'
 openai.api_key = os.getenv('OPEN_API_KEY')
 
+filename = "Instrukcja.docx"
 def remove_empty_lines(file_name):
-    base_path = r"D:\programowanie\Lab_Manager3\event-calendar\uploads"
-    full_path = os.path.join(base_path, file_name)
-    doc = Document(full_path)
+    doc = Document(r"D:\peogramy\python\Lab Manager\laboratory_manager\uploads\uploads\21.07-zamowienie_Łukasz_Gąsior.docx")
     # Usuń puste wiersze i złącz wszystkie paragrafy w jeden string
     cleaned_text = ' '.join([paragraph.text for paragraph in doc.paragraphs if paragraph.text.strip() != ''])
     

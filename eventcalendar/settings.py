@@ -128,3 +128,11 @@ USE_TZ = False
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+MEDIA_URL = '/uploads/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads/')
+
+# D:\peogramy\python\Lab Manager\laboratory_manager\uploads\Instrukcja-obsługi-sonifikatora.docx
+# laboratory_manager\uploads\Instrukcja-obsługi-sonifikatora.docx
+# D:\programowanie\Lab_Manager3\event-calendar\uploads\Instrukcja obsługi sonifikatora
