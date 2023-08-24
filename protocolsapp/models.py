@@ -10,8 +10,3 @@ class Protocols(models.Model):
     def __str__(self):
         return self.title
     
-class ChatResponse(models.Model):
-    protocol = models.OneToOneField(Protocols, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200, blank=True, null=True, default='blbl')
-    description = models.CharField(max_length=500, blank=True, null=True)
-    method = models.TextField(max_length=1000, blank=True, null=True)
