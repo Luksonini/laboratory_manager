@@ -1,5 +1,7 @@
 #settings
 event-calendar/eventcalendar/settings.py
+media/
+uplods/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
