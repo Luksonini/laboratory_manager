@@ -5,3 +5,20 @@ sources = ["pyup", "github", "gemnasium", "osv", "pypa"]
 cache_dir = ".skjold_cache"
 cache_expires = 43200
 ignore_file = ".skjoldignore"
+
+[tool.poetry]
+name = "poetry import requirements-txt"
+version = "poetry update"
+description = "a"
+authors = ["Luksonini"]
+license = "none"
+readme = "README.md"
+packages = [{include = "poetry import requirements"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

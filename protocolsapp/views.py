@@ -5,20 +5,18 @@ from .forms import ProtocolsForm
 import openai
 import os
 
-openai.api_key = os.getenv('OPEN_API_KEY')
-os.environ['OPEN_API_KEY'] = ''
 
 def upload_and_process_protocol(request):
     if request.method == 'POST':
         protocol_form = ProtocolsForm(request.POST, request.FILES)
         if protocol_form.is_valid():
-            openai.api_key = os.getenv('OPEN_API_KEY')
-            
+            openai.api_key = os.getenv('OPENAI_API_KEY')
+
             # Zapisz tylko plik w celu uzyskania dostępu do ścieżki pliku
             file_field = protocol_form.cleaned_data.get('file')
             temp_protocol = Protocols(file=file_field)
             temp_protocol.save()
-            
+
             # Przetworzenie pliku
             doc_path = temp_protocol.file.path
             cleaned_text = remove_empty_lines(doc_path)
@@ -27,7 +25,7 @@ def upload_and_process_protocol(request):
             response = generate_openai_response(prompt)
             print(response)
             title, description, method = extract_info_from_response(response)
-            
+
             # Aktualizacja reszty pól i zapis
             temp_protocol.title = title
             temp_protocol.description = description
@@ -53,5 +51,5 @@ def protocols(request):
 def detail(request, id):
     protocol = Protocols.objects.get(id=id)
     return render(request, 'protocolsapp/protocol_detail.html', {'protocol': protocol})
-    
+
 
