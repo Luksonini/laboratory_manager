@@ -25,7 +25,7 @@ SECRET_KEY = "i8e1s3!_(fjsiv%1pn3sb3o=s)!p*nzwh1$gp5-l&%nb!d=y_s"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["Neurobiologia.pythonanywhere.com"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -132,7 +132,3 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 MEDIA_URL = '/uploads/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads/')
-
-# D:\peogramy\python\Lab Manager\laboratory_manager\uploads\Instrukcja-obsługi-sonifikatora.docx
-# laboratory_manager\uploads\Instrukcja-obsługi-sonifikatora.docx
-# D:\programowanie\Lab_Manager3\event-calendar\uploads\Instrukcja obsługi sonifikatora
