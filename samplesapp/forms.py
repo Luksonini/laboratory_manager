@@ -10,8 +10,9 @@ class SamplesForm(forms.ModelForm):
     location = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200', "placeholder": "Pole wymagane np: -80, dolna półka"}))
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'w-full border rounded bg-blue-200', 'rows': '4', "placeholder": "Pole opcjonalne np: Próbki na proteomikę"}), required=False) 
     quantity = forms.IntegerField(
-        widget=forms.NumberInput(attrs={'class': 'w-full border rounded bg-blue-200', 'step': '0.01'}),  
-    )
+    widget=forms.NumberInput(attrs={'class': 'w-full border rounded bg-blue-200', 'step': '0.01'}),
+    initial=1,  
+)
 
 
     def __init__(self, *args, **kwargs):

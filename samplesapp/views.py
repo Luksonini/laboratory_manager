@@ -7,14 +7,16 @@ from reagentsapp.utils import generate_pie_chart
 import base64
 from io import BytesIO
 import qrcode
+from calendarapp.decorators import verified_required
 
-# Create your views here.
+@verified_required
 def samples(request):
     samples = SamplesModel.objects.all()
     sample_filter = OrderSampleFilter(request.GET, queryset=samples)
     samples = sample_filter.qs
     return render(request, 'samplesapp/samples.html', {"samples" : samples, "sample_filter" : sample_filter})
 
+@verified_required
 def create_sample(request):
     if request.method == 'POST':
         samples_form = SamplesForm(request.POST)
@@ -24,6 +26,7 @@ def create_sample(request):
     samples_form = SamplesForm()
     return render(request, 'samplesapp/create_sample.html', {'samples_form': samples_form})
 
+@verified_required
 def edit_sample(request, id):
     samples = SamplesModel.objects.get(id=id)
     samples_form = SamplesForm(request.POST or None, instance=samples)
@@ -32,11 +35,13 @@ def edit_sample(request, id):
         return redirect('samplesapp:samples_list')
     return render(request, 'samplesapp/edit_sample.html', {'samples_form': samples_form})
 
+@verified_required
 def delete_sample(request, id):
     sample = SamplesModel.objects.get(id=id)
     sample.delete()
     return redirect('samplesapp:samples_list')
 
+@verified_required
 def sample_details(request, id, access_key=None):
     sample = SamplesModel.objects.get(id=id)
     usages = SampleUsageModel.objects.filter(sample=sample)
@@ -81,7 +86,7 @@ def sample_details(request, id, access_key=None):
         'usages': usages
     })
 
-
+@verified_required
 def generate_qr_code_url(request, sample):
     sample_url = request.build_absolute_uri(reverse('samplesapp:sample_details', args=[sample.id, sample.access_key]))
     img = qrcode.make(sample_url)

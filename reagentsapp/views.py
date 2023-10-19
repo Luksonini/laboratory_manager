@@ -7,7 +7,10 @@ from django.urls import reverse
 import base64
 from io import BytesIO
 import qrcode
+from calendarapp.decorators import verified_required 
 
+
+@verified_required
 def reagents(request):
     reagents = Reagents.objects.all()
     my_filter = OrderFilter(request.GET, queryset=reagents)
@@ -36,7 +39,7 @@ def delete_reagent(request, id):
     reagent.delete()
     return redirect('reagentsapp:reagents_list')
 
-
+@verified_required
 def reagent_details(request, id, access_key=None):
     reagent = Reagents.objects.get(id=id)
     
@@ -68,7 +71,7 @@ def reagent_details(request, id, access_key=None):
         'pie_chart_data': pie_chart_data
     })
 
-
+@verified_required
 def generate_qr_code_url(request, reagent):
     reagent_url = request.build_absolute_uri(reverse('reagentsapp:reagent_details', args=[reagent.id, reagent.access_key]))
     img = qrcode.make(reagent_url)

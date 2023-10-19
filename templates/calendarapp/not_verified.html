@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Użytkownik niezweryfikowany{% endblock title %}
+
+{% block extracss %}
+  <link href="{% static 'calendar/main.css' %}" rel="stylesheet" />
+{% endblock extracss %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Uwaga!</h4>
+        <br>
+        <p>Twoje konto nie jest zweryfikowane. Weryfikacja konta może być udzielona tylko przez administratora.</p>
+        <br>
+        <p class="mb-0">W celu zweryfikowania konta, skontaktuj się z administratorem pod adresem email: <a href="mailto:szewczyk@if-pan.krakow.pl"><strong>szewczyk@if-pan.krakow.pl</strong></a>.</p>
+        <br>
+        <p class="mb-0">Dostęp do listy próbek i odczynników jest możliwy tylko dla zweryfikowanych użytkowników.</p>
+    </div>
+</div>
+
+<style>
+  .alert-warning {
+    font-size: 20px;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    color: #856404;
+  }
+  .alert-heading {
+    font-size: 30px;
+    color: #856404;
+  }
+  a {
+    color: #856404;
+  }
+  a:hover {
+    color: #674d31;
+  }
+</style>
+
+{% endblock content %}

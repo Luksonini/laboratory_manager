@@ -20,4 +20,5 @@ urlpatterns = [
         views.RunningEventsListView.as_view(),
         name="running_events",
     ),
+    path("not_verified/", views.other_views.not_verified, name='not_verified'),
 ]
