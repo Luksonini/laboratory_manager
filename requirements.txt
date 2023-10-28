@@ -74,3 +74,4 @@ virtualenv-clone==0.5.7
 webencodings==0.5.1
 wrapt==1.15.0
 yarl==1.9.2
+djangorestframework===3.14.0

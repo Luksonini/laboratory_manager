@@ -13,14 +13,12 @@ class UserManager(BaseUserManager):
     def _create_user(self, email, password=None, **extra_fields):
         """Creates and returns a new user using an email address"""
         if not email:  # check for an empty email
-            raise AttributeError("User must set an email address")
-        else:  # normalizes the provided email
-            email = self.normalize_email(email)
+            raise ValueError("User must set an email address")
+        email = self.normalize_email(email)
 
-        # create user
         user = self.model(email=email, **extra_fields)
-        user.set_password(password)  # hashes/encrypts password
-        user.save(using=self._db)  # safe for multiple databases
+        user.set_password(password)
+        user.save(using=self._db)
         return user
 
     def create_user(self, email, password=None, **extra_fields):
@@ -56,7 +54,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_("Date Joined"), auto_now_add=True)
     last_updated = models.DateTimeField(_("Last Updated"), auto_now=True)
     is_verified = models.BooleanField(_("Verified"), default=False)
-
+    username = models.CharField(max_length=30, unique=True, null=True, blank=True)
+    followers = models.ManyToManyField('self', related_name='followed_by', blank=True, symmetrical=False)
+    following = models.ManyToManyField('self', related_name='follows', blank=True, symmetrical=False)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/user.png')
     objects = UserManager()
 
     USERNAME_FIELD = "email"

@@ -27,6 +27,7 @@ urlpatterns = [
     path("reagents/", include('reagentsapp.urls')),
     path("samples/", include('samplesapp.urls')),
     path("protocols/", include('protocolsapp.urls')),
+    path("forum/", include('forum.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

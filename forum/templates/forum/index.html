@@ -1,0 +1,100 @@
+{% extends "forum/layout.html" %}
+{% load static %}
+
+{% block script %}
+<script src="{% static 'forum/js/main.js' %}" type="text/javascript"></script>
+<script>
+    
+    let display_posts = "{{username}}";
+    let heartImageUrl = `{% static 'forum/heart.png' %}`
+
+</script>
+
+{% endblock script %}
+
+{% block body %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+        <li id="prev-button"><a class="page-link">Previous</a></li>
+        <li id="next-button"><a class="page-link">Next</a></li>
+        </ul>
+    </nav>
+    <div class=main-body-container>
+        <div id="followers_container">
+            {% if username != request.user.username %}
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="follow" value="{{username}}">
+                <button type="submit" class="follow-btn">
+                    {% if not is_follower %}Follow{% else %}Unfollow{% endif %}
+                </button>
+            </form>
+            {% endif %}
+            {% if followers %}
+            <p class="follow-title">Followers ({{followers|length}}):</p>
+            <div class="follower-list-container">
+                <ul class="nav" role="tablist">
+                    {% for follower in followers %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'forum:profile' username=follower.username %}">
+                                <div class="follower">
+                                    <img src="{{follower.profile_picture.url}}" alt="{{follower.username}}">
+                                    <strong>{{follower.username}}</strong>
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% else %}
+                <p class="follow-title">No followers yet.</p>
+            {% endif %}
+            {% if followings %}
+            <p class="follow-title">Following ({{followings|length}}):</p>
+            <div class="following-list-container">
+                <ul class="nav" role="tablist">
+                    {% for followed_user in followings %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'forum:profile' username=followed_user.username %}">
+                                <div class="following">
+                                    <img src="{{followed_user.profile_picture.url}}" alt="{{followed_user.username}}">
+                                    <strong>{{followed_user.username}}</strong>
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% else %}
+                <p>No followins yet.</p>
+            {% endif %}
+            {% if username == request.user.username %}
+            <hr>
+            <p>Change avatar</p>
+            <form class="avatarform" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" id="avatar" name="avatar" accept="image/*">
+                <label for="avatar" class="label-file">Choose file</label>
+                <button type="submit" class="avatar_btn">Confirm</button>
+            </form>
+            <hr>
+            {% endif %}
+        </div>
+        <div id="input_container">
+            <div class="new-post">
+                <div class="author_container">
+                    <img src="{{request.user.profile_picture.url}}" alt="">
+                    <a href="{% url 'forum:profile' username=request.user.username %}" style="text-align: center;">
+                        <strong>{{request.user.username}}</strong>
+                    </a>
+                    <button id="send-post-btn">Send</button>
+                </div>
+                <textarea id="new-post-field" autofocus placeholder="Enter your post here" name="" class="textara_field"></textarea>
+        </div>
+    </div>
+    {% csrf_token %}
+    <input type="hidden" id="csrfToken" value="{{ csrf_token }}">
+    <div style="display: none;" id="user-data" data-user="{{ request.user.id}}" data-username="{{ request.user.username}}" data-profile-picture="{{ request.user.profile_picture.url }}">
+    </div>
+    <div id="posts"></div>
+{% endblock %}

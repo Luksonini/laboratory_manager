@@ -50,6 +50,13 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
+                                                        <label class="label" for="email">Nick</label>
+                                                        {{ form.username }}
+                                                        <span class="text-danger">{{ form.errors.username }}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
                                                         <label class="label" for="password">Password</label>
                                                         {{ form.password1 }}
                                                         <span class="text-danger">{{ form.errors.password1 }}</span>
