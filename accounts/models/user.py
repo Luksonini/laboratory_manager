@@ -54,13 +54,19 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_("Date Joined"), auto_now_add=True)
     last_updated = models.DateTimeField(_("Last Updated"), auto_now=True)
     is_verified = models.BooleanField(_("Verified"), default=False)
-    username = models.CharField(max_length=30, unique=True, null=True, blank=True)
+    username = models.CharField(max_length=30, default='', blank=True)  # Zmień domyślną wartość na ''
     followers = models.ManyToManyField('self', related_name='followed_by', blank=True, symmetrical=False)
     following = models.ManyToManyField('self', related_name='follows', blank=True, symmetrical=False)
     profile_picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/user.png')
     objects = UserManager()
 
+
     USERNAME_FIELD = "email"
+
+    def save(self, *args, **kwargs):
+        if not self.username:
+            self.username = self.email  # Jeżeli nie ma wartości w polu username, przypisz wartość z pola email
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.email

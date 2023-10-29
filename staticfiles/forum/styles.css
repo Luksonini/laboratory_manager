@@ -1,0 +1,367 @@
+
+/* paginator */
+
+.page-item:hover{
+    cursor: pointer;
+}
+
+/* Stylizacja ogólna dla postów */
+.post, .new-post {
+    position: relative;
+    display: flex;
+    /* width: 75%; */
+    align-items: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 0 auto 15px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: 0.3s;
+}
+
+.post:hover, .new-post:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#send-post-btn{
+    margin-top: 5px;
+}
+
+
+/* Stylizacja dla kontenera autora */
+.author_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.author_container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;  /* Tworzy okrągły avatar */
+}
+
+.author_container p {
+    margin: 0;
+}
+
+.likes-container {
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.likes-container:hover {
+    transform: scale(0.9); /* pomniejszenie o 10% podczas najechania */
+    cursor: pointer
+}
+
+#heart-image {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 0;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Stylizacja dla kontenera komentarza */
+.comment_container {
+    flex: 1;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+.likes-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    z-index: 2;
+}
+
+.comment_container p {
+    margin: 0;
+    padding-left: 65px;  /* Tak samo jak szerokość obrazka + odstęp, aby tekst nie nachodził na obrazek */
+}
+
+/* Stylizacja paginacji */
+.pagination {
+    justify-content: center;
+}
+
+.pagination li a {
+    color: #333;
+}
+
+.pagination li.active a {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+.pagination li.disabled a {
+    color: #aaa;
+    pointer-events: none;
+}
+
+.textara_field {
+    border: 1px solid;
+    border-color: #007bff;
+    min-height: 100%;
+    width: 90%;
+    margin-left: 65px;
+    border: none;
+    height: 148px;
+}
+
+.textara_field:focus {
+   
+    outline: none;
+}
+
+.edit_btn{
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+.edit_btn, .follow-btn, #send-post-btn {
+    background-color: #007BFF;
+    width: 90px;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 10px;
+}
+
+.edit_btn:hover, .follow-btn:hover, #send-post-btn:hover {
+    background-color: #0056b3;  /* Kolor tła przy najechaniu */
+    color: #FFF;                /* Kolor tekstu przy najechaniu (bez zmian) */
+}
+
+.edit_btn:active, .follow-btn:active, #send-post-btn:active  {
+    transform: scale(0.98);     /* Lekkie "wciśnięcie" przycisku podczas klikania */
+}
+
+.edit_btn:focus, .follow-btn:focus {
+    outline: none;              /* Usunięcie domyślnej ramki podczas fokusowania */
+    box-shadow: 0 0 5px #007BFF; /* Dodanie cienia wokół przycisku podczas fokusowania */
+}
+
+/* changing avatar picture */
+.avatarform{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Ukrycie oryginalnego inputa */
+#avatar {
+    display: none;
+}
+
+/* Stylizacja etykiety, która będzie działać jako guzik */
+.label-file {
+    width: 112px;
+    background-color: #007BFF;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.label-file:hover {
+    background-color: #0056b3;
+    color: #FFF;
+}
+
+.label-file:active {
+    transform: scale(0.98);
+}
+
+.label-file:focus {
+    outline: none;
+    box-shadow: 0 0 5px #007BFF;
+}
+
+.avatar_btn {
+    position: relative;
+    background-color: #007BFF;
+    width: 130px;             /* Zmieniony rozmiar, żeby tekst "Zaktualizuj Avatar" się mieścił */
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 10px;
+}
+
+.avatar_btn:hover {
+    background-color: #0056b3;
+    color: #FFF;
+}
+
+.avatar_btn:active {
+    transform: scale(0.98);
+}
+
+.avatar_btn:focus {
+    outline: none;
+    box-shadow: 0 0 5px #007BFF;
+}
+
+/* pforile elements */
+
+.main-body-container{
+    display: flex;
+}
+
+#posts{
+    flex: 1;
+
+}
+
+/* followers */
+.follow-title{
+    margin-bottom: 0;
+}
+
+.follower img, .following img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+#followers_container{
+    min-width: 250px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 10px 0 50px;
+    font-weight: 500;
+}
+
+.follower-list-container, .following-list-container {
+    max-height: 150px;
+    max-width: 200px;
+    overflow-y: auto;
+    margin-bottom: 30px;
+}
+
+/* comments */
+
+
+@keyframes hide {
+    0% {
+        opacity: 1;
+        transform: scaleY(1);
+        margin-bottom: 10px;
+    }
+    100% {
+        opacity: 0;
+        transform: scaleY(0);
+        margin-bottom: 0px;
+    }
+}
+
+@keyframes show {
+    0% {
+        opacity: 0;
+        transform: scaleY(0);
+        margin-bottom: 0px;
+    }
+    100% {
+        opacity: 1;
+        transform: scaleY(1);
+        margin-bottom: 10px;
+    }
+}
+
+.comment-div {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    flex-direction: column;
+    width: 50%;
+    gap: 8px;
+    opacity: 1;
+    /* height: 100%; */
+    line-height: 100%;
+    padding: 0;
+    margin-bottom: 0;
+    overflow: hidden;
+    transform-origin: top; 
+}
+
+.comment-div.hide-animation,
+.comment-div.hide-animation > * {
+    animation: hide 0.5s forwards;
+}
+
+.comment-div.show-animation,
+.comment-div.show-animation > * {
+    animation: show 0.5s forwards;
+}
+
+.users-comment, .others-comment {
+    padding: 8px 12px; 
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.6; 
+    position: relative; 
+}
+
+.users-comment {
+    align-self: flex-end;
+    background-color: #E9E9E9; 
+    border-radius: 18px 0 18px 18px; 
+}
+
+.others-comment-wrapper {
+    align-self: flex-start;
+    display: flex;
+    align-items: center; 
+}
+
+.others-comment-wrapper img.others-avatar {
+    border-radius: 50%; 
+    width: 36px; 
+    height: 36px; 
+    object-fit: cover; 
+    flex-shrink: 0;
+    margin-right: 8px;  
+}
+
+.others-comment {
+    background-color: #D1E9FB;
+    padding: 8px 12px; 
+    border-radius: 0 18px 18px 18px; 
+    flex-grow: 1;
+    /* display: flex;
+    align-items: start; */
+}
+
+.others-comment img {
+    border-radius: 50%; 
+    width: 36px; 
+    height: 36px; 
+    object-fit: cover; 
+    flex-shrink: 0;
+}

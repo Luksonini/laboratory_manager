@@ -57,7 +57,7 @@
                 </li>
             </ul>
         </header>
-        
+
         <!-- Sidebar menu-->
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
         <aside class="app-sidebar">
@@ -83,17 +83,17 @@
                     </ul>
                 </li>
                 <li>
-                    <a class="app-menu__item" href="{% url 'samplesapp:samples_list' %}"><i class="app-menu__icon fa  fa-flask"></i><span class="app-menu__label">próbki</span></a>
+                    <a class="app-menu__item" href="{% url 'samplesapp:samples_list' %}"><i class="app-menu__icon fa  fa-flask"></i><span class="app-menu__label">Próbki</span></a>
                 </li>
                 <li>
                     <a class="app-menu__item" href="{% url 'reagentsapp:reagents_list' %}"><i class="app-menu__icon fa fa-warehouse"></i><span class="app-menu__label">Odczynniki</span></a>
                 </li>
                 <li>
                     <a class="app-menu__item" href="{% url 'protocolsapp:protocols_list' %}"><i class="app-menu__icon fa fa-list"></i><span class="app-menu__label">Protokoły</span></a>
-                </li> 
+                </li>
                 <li>
                     <a class="app-menu__item" href="{% url 'forum:index' %}"><i class="app-menu__icon fa fa-list"></i><span class="app-menu__label">Forum</span></a>
-                </li> 
+                </li>
             </ul>
         </aside>
         <main class="app-content w-screen mr-10">
@@ -103,11 +103,6 @@
             </div>
             {% block content %}
             {% endblock content %}
-            BELEU!
-
-            <strong>{{ request.user.email }}</strong>{{ request.user.username }}
-
-            BELEU!
         </main>
         <!-- Essential javascripts for application to work-->
         {% include 'base/js.html' %}
