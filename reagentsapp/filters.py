@@ -3,6 +3,7 @@ from django import forms
 from django_filters import CharFilter 
 from .models import Reagents
 
+
 class OrderFilter(django_filters.FilterSet):
     reagent_name = CharFilter(lookup_expr='icontains', widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200', 'style': 'max-width: 100px;'}))
     owner = CharFilter(lookup_expr='icontains', widget=forms.TextInput(attrs={'class': 'form-input border rounded bg-blue-200', 'style': 'max-width: 100px;'}))
@@ -16,3 +17,5 @@ class OrderFilter(django_filters.FilterSet):
         model = Reagents
         fields = '__all__'
         exclude = ["purchase_date", "expiration_date", "description"]
+
+

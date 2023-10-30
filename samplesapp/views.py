@@ -26,7 +26,7 @@ def samples(request):
     except EmptyPage:
         samples = paginator.page(paginator.num_pages)
     
-    return render(request, 'samplesapp/samples.html', {"samples" : samples, "sample_filter" : sample_filter})
+    return render(request, 'samplesapp/samples.html', {"samples": samples, "sample_filter": sample_filter})
 
 @verified_required
 def create_sample(request):

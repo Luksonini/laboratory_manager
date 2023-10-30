@@ -1,52 +1,54 @@
 {% extends 'base/base.html' %}
-
+{% load myfilters %}
 {% block content %}
 <div class="md:container m-10 w-full">
     <div class="flex items-end mb-1">
         <h2 class="text-3xl font-bold">Lista próbek</h2>
     </div>
-                <!-- Paginacja Bootstrap -->
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                      {% if samples.has_previous %}
-                          <li class="page-item">
-                              <a class="page-link" href="?page=1" aria-label="First">
-                                  <span aria-hidden="true">&laquo;&laquo;</span>
-                              </a>
-                          </li>
-                          <li class="page-item">
-                              <a class="page-link" href="?page={{ samples.previous_page_number }}" aria-label="Previous">
-                                  <span aria-hidden="true">&laquo;</span>
-                              </a>
-                          </li>
-                      {% endif %}
-                      
-                      {% for num in samples.paginator.page_range %}
-                          {% if samples.number == num %}
-                              <li class="page-item active">
-                                  <span class="page-link">{{ num }}</span>
-                              </li>
-                          {% else %}
-                              <li class="page-item">
-                                  <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                              </li>
-                          {% endif %}
-                      {% endfor %}
-                      
-                      {% if samples.has_next %}
-                          <li class="page-item">
-                              <a class="page-link" href="?page={{ samples.next_page_number }}" aria-label="Next">
-                                  <span aria-hidden="true">&raquo;</span>
-                              </a>
-                          </li>
-                          <li class="page-item">
-                              <a class="page-link" href="?page={{ samples.paginator.num_pages }}" aria-label="Last">
-                                  <span aria-hidden="true">&raquo;&raquo;</span>
-                              </a>
-                          </li>
-                      {% endif %}
-                    </ul>
-                  </nav>
+    <!-- Paginacja Bootstrap -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if samples.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ request.get_full_path|update_page_param:1 }}" aria-label="First">
+                        <span aria-hidden="true">&laquo;&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="{{ request.get_full_path|update_page_param:samples.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+            
+            {% for num in samples.paginator.page_range %}
+                {% if samples.number == num %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ num }}</span>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ request.get_full_path|update_page_param:num }}">{{ num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            
+            {% if samples.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ request.get_full_path|update_page_param:samples.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="{{ request.get_full_path|update_page_param:samples.paginator.num_pages }}" aria-label="Last">
+                        <span aria-hidden="true">&raquo;&raquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+    
+
     <form method='get'>
     <table class="bg-white border border-gray-300 w-full">
         <thead class='text-lg bg-blue-400 text-white'>
