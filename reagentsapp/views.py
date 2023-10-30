@@ -8,13 +8,26 @@ import base64
 from io import BytesIO
 import qrcode
 from calendarapp.decorators import verified_required 
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 @verified_required
 def reagents(request):
-    reagents = Reagents.objects.all()
-    my_filter = OrderFilter(request.GET, queryset=reagents)
-    reagents = my_filter.qs
+    reagents_list = Reagents.objects.all()
+    my_filter = OrderFilter(request.GET, queryset=reagents_list)
+    reagents_list = my_filter.qs
+    
+    # Dodaj paginację
+    paginator = Paginator(reagents_list, 10)  # Show 10 reagents per page
+    page = request.GET.get('page')
+    try:
+        reagents = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        reagents = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        reagents = paginator.page(paginator.num_pages)
+    
     return render(request, 'reagentsapp/reagents.html', {'reagents': reagents, 'my_filter': my_filter})
 
 def create_reagent(request):

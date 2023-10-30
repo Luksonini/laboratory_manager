@@ -8,12 +8,24 @@ import base64
 from io import BytesIO
 import qrcode
 from calendarapp.decorators import verified_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 @verified_required
 def samples(request):
-    samples = SamplesModel.objects.all()
-    sample_filter = OrderSampleFilter(request.GET, queryset=samples)
+    samples_list = SamplesModel.objects.all()
+    sample_filter = OrderSampleFilter(request.GET, queryset=samples_list)
     samples = sample_filter.qs
+    
+    # Paginacja
+    paginator = Paginator(samples, 10)  # Zmieniaj tę liczbę, aby kontrolować ile obiektów na stronę
+    page = request.GET.get('page')
+    try:
+        samples = paginator.page(page)
+    except PageNotAnInteger:
+        samples = paginator.page(1)
+    except EmptyPage:
+        samples = paginator.page(paginator.num_pages)
+    
     return render(request, 'samplesapp/samples.html', {"samples" : samples, "sample_filter" : sample_filter})
 
 @verified_required

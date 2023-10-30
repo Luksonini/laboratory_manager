@@ -4,8 +4,49 @@
 <div class="md:container w-full m-10">
     <div class="flex items-end mb-1">
         <h2 class="text-3xl font-bold">Lista odczynników</h2>
-        <a href="{% url 'reagentsapp:create_reagent' %}" class="ml-2 rounded-full py-2 px-4 bg-indigo-400 hover:bg-indigo-500 text-white">Dodaj</a>
     </div>
+        <!-- Paginacja Bootstrap -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if reagents.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1" aria-label="First">
+                            <span aria-hidden="true">&laquo;&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ reagents.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+                
+                {% for num in reagents.paginator.page_range %}
+                    {% if reagents.number == num %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if reagents.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ reagents.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ reagents.paginator.num_pages }}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;&raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+            </nav>
     <form method='get'>
     <table class="bg-white border border-gray-300 w-full">
         <thead class='text-lg bg-blue-400 text-white'>
@@ -19,7 +60,10 @@
                 <th class="py-2 px-4 border-b">Data zakupu</th>
                 <th class="py-2 px-4 border-b">Pozostała ilość</th>
                 <th class="py-2 px-4 border-b">Jednostka</th>
-                <th class="py-2 px-4 border-b"><button class="rounded-full py-2 px-4 bg-indigo-400 hover:bg-indigo-500 text-white text-base font-normal" type='submit'>Znajdź</button>
+                <th class="py-2 px-4 border-b">
+                    <button class="rounded-full py-2 px-4 bg-indigo-400 hover:bg-indigo-500 text-white text-base font-normal" type='submit'>Znajdź</button>
+                    <button class="rounded-full py-2 px-4 ml-2 bg-indigo-400 hover:bg-indigo-500 text-white text-base font-normal" onclick="location.href='{% url 'reagentsapp:create_reagent' %}'" type="button">Dodaj</button>
+                </th>                
             </tr>
         </thead>
         
@@ -36,14 +80,16 @@
                     <td class="py-2 px-4 border-b">{{ reagent.remained }}</td>
                     <td class="py-2 px-4 border-b">{{ reagent.unit }}</td>
                     <td class="py-4 px-4 border-b whitespace-nowrap">
-                    <a href="{% url 'reagentsapp:delete_reagent' reagent.id %}" class="rounded-full py-2 px-4 border-b bg-yellow-400 hover:bg-yellow-500" onclick="return confirm('Czy na pewno chcesz usunąć ten odczynnik?');">Usuń</a> 
-                    <a href="{% url 'reagentsapp:edit_reagent' reagent.id %}" class="rounded-full ml-2 py-2 px-4 border-b bg-green-400 hover:bg-green-500">Edytuj</a>
-                    <a href="{% url 'reagentsapp:reagent_details' reagent.id reagent.access_key %}" class="rounded-full ml-2 py-2 px-4 border-b bg-rose-100 hover:bg-rose-200">Szczegóły</a>
+                        <a href="{% url 'reagentsapp:delete_reagent' reagent.id %}" class="rounded-full py-2 px-4 border-b bg-yellow-400 hover:bg-yellow-500" onclick="return confirm('Czy na pewno chcesz usunąć ten odczynnik?');">Usuń</a> 
+                        <a href="{% url 'reagentsapp:edit_reagent' reagent.id %}" class="rounded-full ml-2 py-2 px-4 border-b bg-green-400 hover:bg-green-500">Edytuj</a>
+                        <a href="{% url 'reagentsapp:reagent_details' reagent.id reagent.access_key %}" class="rounded-full ml-2 py-2 px-4 border-b bg-rose-100 hover:bg-rose-200">Szczegóły</a>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
     </form>
-</div>
-{% endblock %}
+
+        
+    </div>
+    {% endblock %}
