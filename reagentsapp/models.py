@@ -9,6 +9,7 @@ class Reagents(models.Model):
         ('ul', 'ul'),
         ('g', 'g'),
         ('mg', 'mg'),
+        ('ug', 'ug'),
         ('szt', 'sztuk'),
     )
     reagent_name = models.CharField(max_length=200)
@@ -27,7 +28,7 @@ class Reagents(models.Model):
     def save(self, *args, **kwargs):
         if self.remained is None:  # Sprawdzamy, czy remained jest pusty
             self.remained = self.quantity
-        else: 
+        else:
             self.remained = round(self.remained, 2)
         if not self.access_key:
             self.access_key = get_random_string(length=32)  # generowanie klucza
@@ -36,8 +37,8 @@ class Reagents(models.Model):
 
     def __str__(self):
         return self.reagent_name
-    
-  
+
+
 
 
 
