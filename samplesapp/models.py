@@ -12,7 +12,7 @@ class SamplesModel(models.Model):
     quantity = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     sample_type = models.CharField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    remained = models.IntegerField(null=True, blank=True, validators=[MinValueValidator(0)])
+    remained = models.IntegerField(null=True, blank=True, validators=[MinValueValidator(0)], default=1)
     access_key = models.CharField(max_length=32, unique=True, blank=True)
 
 

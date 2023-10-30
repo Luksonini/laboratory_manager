@@ -25,7 +25,7 @@
         
         <tbody>
             {% for reagent in reagents %}
-                <tr class="text-1xl hover:bg-gray-100">
+                <tr class="text-1xl hover:bg-gray-100"> 
                     <td class="py-2 px-4 border-b font-bold">{{ reagent.reagent_name }}</td>
                     <td class="py-2 px-4 border-b">{{ reagent.owner }}</td>
                     <td class="py-2 px-4 border-b">{{ reagent.firm }}</td>
@@ -35,7 +35,7 @@
                     <td class="py-2 px-4 border-b">{{ reagent.purchase_date }}</td>
                     <td class="py-2 px-4 border-b">{{ reagent.remained }}</td>
                     <td class="py-2 px-4 border-b">{{ reagent.unit }}</td>
-                    <td class="py-2 px-4 border-b inline-flex">
+                    <td class="py-4 px-4 border-b whitespace-nowrap">
                     <a href="{% url 'reagentsapp:delete_reagent' reagent.id %}" class="rounded-full py-2 px-4 border-b bg-yellow-400 hover:bg-yellow-500" onclick="return confirm('Czy na pewno chcesz usunąć ten odczynnik?');">Usuń</a> 
                     <a href="{% url 'reagentsapp:edit_reagent' reagent.id %}" class="rounded-full ml-2 py-2 px-4 border-b bg-green-400 hover:bg-green-500">Edytuj</a>
                     <a href="{% url 'reagentsapp:reagent_details' reagent.id reagent.access_key %}" class="rounded-full ml-2 py-2 px-4 border-b bg-rose-100 hover:bg-rose-200">Szczegóły</a>

@@ -6,9 +6,10 @@ class Reagents(models.Model):
     UNIT_CHOICES = (
         ('-', '-'),
         ('ml', 'ml'),
-        ('ul', 'ul'),
+        ('μl', 'μl'),
         ('g', 'g'),
         ('mg', 'mg'),
+        ('μg', 'μg'),
         ('ug', 'ug'),
         ('szt', 'sztuk'),
     )

@@ -3,12 +3,12 @@ from . models import SamplesModel, SampleUsageModel
 
 class SamplesForm(forms.ModelForm):
 
-    sample_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200', "placeholder": "Pole wymagane np: Kora, ketamina"}))
-    species = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200', "placeholder": "np: mysz"}))
-    sample_type = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200', "placeholder": "np: Kora"}))
-    owner = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200 w-1/10', "placeholder": "Pole opcjonalne np: Bartek"}), required=False)
-    location = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200', "placeholder": "Pole wymagane np: -80, dolna półka"}))
-    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'w-full border rounded bg-blue-200', 'rows': '4', "placeholder": "Pole opcjonalne np: Próbki na proteomikę"}), required=False) 
+    sample_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200 input-placeholder', "placeholder": "Pole wymagane np: Kora, ketamina"}))
+    species = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200 input-placeholder', "placeholder": "np: mysz"}))
+    sample_type = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200 input-placeholder', "placeholder": "np: Kora"}))
+    owner = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200 w-1/10 input-placeholder', "placeholder": "Pole opcjonalne np: Bartek"}), required=False)
+    location = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200 input-placeholder', "placeholder": "Pole wymagane np: -80, dolna półka"}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'w-full border rounded bg-blue-200 input-placeholder', 'rows': '4', "placeholder": "Pole opcjonalne np: Próbki na proteomikę"}), required=False) 
     quantity = forms.IntegerField(
     widget=forms.NumberInput(attrs={'class': 'w-full border rounded bg-blue-200', 'step': '0.01'}),
     initial=1,  

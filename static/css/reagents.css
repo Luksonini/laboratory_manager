@@ -2,3 +2,9 @@
     font-size: 1.2rem;
     text-align: center;
 }
+
+
+.input-placeholder::placeholder {
+    color: grey;
+    font-weight: 300;
+  }
