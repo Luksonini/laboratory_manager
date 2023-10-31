@@ -64,7 +64,7 @@
                 <th class="py-2 px-4 border-b">Jednostka</th>
                 <th class="py-2 px-4 border-b">
                     <button class="rounded-full py-2 px-4 bg-indigo-400 hover:bg-indigo-500 text-white text-base font-normal" type='submit'>Znajdź</button>
-                    <button class="rounded-full py-2 px-4 ml-2 bg-indigo-400 hover:bg-indigo-500 text-white text-base font-normal" onclick="location.href='{% url 'reagentsapp:create_reagent' %}'" type="button">Dodaj</button>
+                    <button id="myButton" class="rounded-full py-2 px-4 ml-2 bg-indigo-400 hover:bg-indigo-500 text-white text-base font-normal" type="button">Dodaj</button>
                 </th>                
             </tr>
         </thead>
@@ -91,7 +91,22 @@
         </tbody>
     </table>
     </form>
-
-        
     </div>
+
+
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    // Znajdź przycisk za pomocą id
+    var button = document.getElementById("myButton");
+
+    // Dodaj nasłuchiwanie zdarzenia kliknięcia do przycisku
+    button.addEventListener("click", function() {
+        // Przekieruj użytkownika do określonego URL
+        window.location.href = "{% url 'reagentsapp:create_reagent' %}";
+    });
+    });
+    </script>
+
+ 
     {% endblock %}

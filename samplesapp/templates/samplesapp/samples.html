@@ -62,7 +62,7 @@
                 <th class="py-2 px-4 border-b">Pozostało</th>
                 <th class="py-2 px-4 border-b">
                     <button class="rounded-full py-2 px-4 bg-indigo-400 hover:bg-indigo-500 text-white text-base font-normal" type='submit'>Znajdź</button>
-                    <button class="ml-2 rounded-full py-2 ml-2 px-4 bg-indigo-400 hover:bg-indigo-500 text-white text-base font-normal" onclick="location.href='{% url 'samplesapp:create_sample' %}'" type="button">Dodaj</button>
+                    <button id="mySampleButton" class="ml-2 rounded-full py-2 px-4 bg-indigo-400 hover:bg-indigo-500 text-white text-base font-normal" type="button">Dodaj</button>
                 </th>                
             </tr>
         </thead>
@@ -88,4 +88,18 @@
     </table>
     </form>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Znajdź przycisk za pomocą id
+      var sampleButton = document.getElementById("mySampleButton");
+    
+      // Dodaj nasłuchiwanie zdarzenia kliknięcia do przycisku
+      sampleButton.addEventListener("click", function() {
+        // Przekieruj użytkownika do określonego URL
+        window.location.href = "{% url 'samplesapp:create_sample' %}";
+      });
+    });
+    </script>
+    
 {% endblock %}
