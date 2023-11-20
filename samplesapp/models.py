@@ -12,7 +12,7 @@ class SamplesModel(models.Model):
     quantity = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     sample_type = models.CharField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    remained = models.IntegerField(null=True, blank=True, validators=[MinValueValidator(0)], default=1)
+    remained = models.IntegerField(null=True, blank=True, validators=[MinValueValidator(0)])
     access_key = models.CharField(max_length=32, unique=True, blank=True)
 
 
@@ -26,13 +26,13 @@ class SamplesModel(models.Model):
         else:
         # Jeśli edytujemy istniejący obiekt, zapewnij, by access_key nie był aktualizowany do pustej wartości.
             self.access_key = SamplesModel.objects.get(pk=self.pk).access_key
-            
+
 
         super(SamplesModel, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.sample_name
-    
+
 class SampleUsageModel(models.Model):
     sample = models.ForeignKey(SamplesModel, on_delete=models.CASCADE, related_name='usages')
     date_used = models.DateField(auto_now_add=True)
@@ -41,7 +41,7 @@ class SampleUsageModel(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        
+
         # Aktualizuj wartość `remained` w `SamplesModel`
         self.sample.remained -= self.quantity_used
         self.sample.save()

@@ -15,7 +15,7 @@ def samples(request):
     samples_list = SamplesModel.objects.all()
     sample_filter = OrderSampleFilter(request.GET, queryset=samples_list)
     samples = sample_filter.qs
-    
+
     # Paginacja
     paginator = Paginator(samples, 10)  # Zmieniaj tę liczbę, aby kontrolować ile obiektów na stronę
     page = request.GET.get('page')
@@ -25,7 +25,7 @@ def samples(request):
         samples = paginator.page(1)
     except EmptyPage:
         samples = paginator.page(paginator.num_pages)
-    
+
     return render(request, 'samplesapp/samples.html', {"samples": samples, "sample_filter": sample_filter})
 
 @verified_required
@@ -53,7 +53,6 @@ def delete_sample(request, id):
     sample.delete()
     return redirect('samplesapp:samples_list')
 
-@verified_required
 def sample_details(request, id, access_key=None):
     sample = SamplesModel.objects.get(id=id)
     usages = SampleUsageModel.objects.filter(sample=sample)
