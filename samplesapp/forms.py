@@ -3,6 +3,7 @@ from . models import SamplesModel, SampleUsageModel
 
 class SamplesForm(forms.ModelForm):
 
+    sample_date = forms.DateField(widget=forms.DateInput(attrs={'class': 'w-full border rounded bg-blue-200 input-placeholder', 'type': 'date'}))
     sample_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200 input-placeholder', "placeholder": "Pole wymagane np: Kora, ketamina"}))
     species = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200 input-placeholder', "placeholder": "np: mysz"}))
     sample_type = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200 input-placeholder', "placeholder": "np: Kora"}))

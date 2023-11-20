@@ -9,7 +9,7 @@ class ReagentForm(forms.ModelForm):
         ('g', 'g'),
         ('mg', 'mg'),
         ('μg', 'μg'),
-        ('szt', 'sztuk'),
+        ('szt', 'sztuk'),   
     )
     reagent_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'w-full border rounded bg-blue-200 input-placeholder', "placeholder": "Pole wymagane np: Fluoksetyna"}))
     expiration_date = forms.DateField(widget=forms.DateInput(attrs={'class': 'w-full border rounded bg-blue-200 input-placeholder', 'type': 'date', "placeholder": "Pole opcjonalne"}), required=False)
