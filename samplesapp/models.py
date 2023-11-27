@@ -4,7 +4,7 @@ from django.utils.crypto import get_random_string
 
 # Create your models here.
 class SamplesModel(models.Model):
-    sample_date = models.DateField(auto_now_add=True)
+    sample_date = models.DateField()
     sample_name = models.CharField(max_length=200)
     species = models.CharField(max_length=50, blank=True, null=True)
     owner = models.CharField(max_length=200, blank=True, null=True)
