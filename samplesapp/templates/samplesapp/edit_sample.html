@@ -3,11 +3,15 @@
 {% block content %}
 <div class="flex justify-center items-center ">
     <div class="w-1/3">
-        <h1 class="font-bold text-3xl mb-3">Edutój próbki:</h1>
+        <h1 class="font-bold text-3xl mb-3">Edutuj próbki:</h1>
         <form class='shadow-lg p-10 text-2xl font-bold bg-blue-300' method='POST'>
             {% csrf_token %}
             
             <!-- Nazwa odczynnika -->
+            <div class="mb-3">
+                <label class="block mb-1">Data izolacji:</label>
+                <div class="no-border rounded appearance-none py-2 px-2 w-full">{{ samples_form.sample_date }}</div>
+            </div>
             <div class="mb-3">
                 <label class="block mb-1">Nazwa próbek:</label>
                 <div class="no-border rounded appearance-none py-2 px-2 w-full">{{ samples_form.sample_name }}</div>
