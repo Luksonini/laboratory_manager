@@ -1,3 +1,4 @@
+![image](https://github.com/Luksonini/laboratory_manager/assets/97095836/b935d042-9bfd-4426-ae71-bed302a55898)
 
 ## How To Setup
 ```
